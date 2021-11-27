@@ -1,1 +1,1 @@
-# Bulls and Cows projectl
+# Bulls and Cows project
