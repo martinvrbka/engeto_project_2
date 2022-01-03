@@ -1,17 +1,13 @@
-# Bulls and Cows project
-# Import required module
+# Engeto Bulls and Cows project
 import random
 
 
 # Returns list of digits
-# of a number
 def create_list_of_numbers(num):
     return [int(i) for i in str(num)]
 
 
-# Returns True if number has
-# no duplicate digits
-# otherwise False
+# Checks duplicity of number
 def check_for_duplicates(num):
     num_li = create_list_of_numbers(num)
     if len(num_li) == len(set(num_li)):
@@ -20,8 +16,7 @@ def check_for_duplicates(num):
         return False
 
 
-# Generates a 4 digit number
-# with no repeated digits
+# Generates a unique 4 digit number
 def generate_number():
     while True:
         num = random.randint(1000, 9999)
@@ -29,21 +24,18 @@ def generate_number():
             return num
 
 
-# Returns common digits with exact
-# matches (bulls) and the common
-# digits in wrong position (cows)
+# compares two lists to decide bulls and cows
 def number_of_bulls_and_cows(num, guess):
     bull_cow = [0, 0]
     num_li = create_list_of_numbers(num)
     guess_li = create_list_of_numbers(guess)
-
-    for i, j in zip(num_li, guess_li):
+    for index, number in enumerate(guess_li):
 
         # common digit present
-        if j in num_li:
+        if number in num_li:
 
             # common digit exact match
-            if j == i:
+            if number == num_li[index]:
                 bull_cow[0] += 1
 
             # common digit match but in wrong position
@@ -53,7 +45,7 @@ def number_of_bulls_and_cows(num, guess):
     return bull_cow
 
 def user_valid_continue_input():
-    user_input = input("Do you want to continue? yes/no")
+    user_input = input("Do you want to play again? yes/no:")
     acceptable_values = ["yes", "no", "y", "n", "YES", "NO", "Y", "N"]
     while user_input not in acceptable_values:
         user_input = input("You have used unsupported value. Please try to use yes or no:")
@@ -69,7 +61,6 @@ def user_valid_tries_input():
         except ValueError:
             tries = input("You entered incorrect value. Please enter a integer:")
 
-# TODO: Musím pokrýt vstupy :/
 def user_valid_guess_input():
     guess = input("Enter your guess: ")
     loopend = "no"
@@ -91,13 +82,13 @@ def user_valid_guess_input():
 
 
 def main():
+    # variable and loop for possible replay
     want_to_continue = "yes"
     while want_to_continue == "yes":
         # Secret Code
         tries = user_valid_tries_input()
         num = generate_number()
-        # Play game until correct guess
-        # or till no tries left
+        # Game
         while tries > 0:
             guess = user_valid_guess_input()
 
