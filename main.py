@@ -2,13 +2,11 @@
 import random
 
 
-# Returns list of digits
 def create_list_of_numbers(num):
     return [int(i) for i in str(num)]
 
 
-# Checks duplicity of number
-def check_for_duplicates(num):
+def check_for_duplicity(num):
     num_li = create_list_of_numbers(num)
     if len(num_li) == len(set(num_li)):
         return True
@@ -16,33 +14,30 @@ def check_for_duplicates(num):
         return False
 
 
-# Generates a unique 4 digit number
 def generate_number():
     while True:
         num = random.randint(1000, 9999)
-        if check_for_duplicates(num):
+        if check_for_duplicity(num):
             return num
 
 
-# compares two lists to decide bulls and cows
 def number_of_bulls_and_cows(num, guess):
     bull_or_cow = [0, 0]
     num_li = create_list_of_numbers(num)
     guess_li = create_list_of_numbers(guess)
-    for index, number in enumerate(guess_li):
 
-        # common digit present
+    # Deciding bull or cow using if else and enumerate
+    for index, number in enumerate(guess_li):
         if number in num_li:
-            # common digit exact match
             if number == num_li[index]:
                 bull_or_cow[0] += 1
-            # common digit match but in wrong position
             else:
                 bull_or_cow[1] += 1
 
     return bull_or_cow
 
-def user_valid_continue_input():
+
+def check_continue_input_validity():
     user_input = input("Do you want to play again? yes/no:")
     acceptable_values = ["yes", "no", "y", "n", "YES", "NO", "Y", "N"]
     while user_input not in acceptable_values:
@@ -50,7 +45,8 @@ def user_valid_continue_input():
     else:
         return user_input
 
-def user_valid_tries_input():
+
+def check_tries_input_validity():
     tries = input('Enter number of tries: ')
     while not isinstance(tries, int):
         try:
@@ -59,13 +55,14 @@ def user_valid_tries_input():
         except ValueError:
             tries = input("You entered incorrect value. Please enter a integer:")
 
-def user_valid_guess_input():
+
+def check_guess_input_validity():
     guess = input("Enter your guess: ")
     loopend = "no"
     while loopend == "no":
         try:
             guess = int(guess)
-            if not check_for_duplicates(guess):
+            if not check_for_duplicity(guess):
                 guess = input("Number should not have repeated digits. Try again:")
             if len(str(guess)) != 4:
                 guess = input("Number should have 4 digits. Try again:")
@@ -78,17 +75,16 @@ def user_valid_guess_input():
     return int(guess)
 
 
-
 def main():
     # variable and loop for possible replay
     want_to_continue = "yes"
     while want_to_continue == "yes":
         # Secret Code
-        tries = user_valid_tries_input()
+        tries = check_tries_input_validity()
         num = generate_number()
         # Game
         while tries > 0:
-            guess = user_valid_guess_input()
+            guess = check_guess_input_validity()
 
             bull_cow = number_of_bulls_and_cows(num, guess)
             print(f"{bull_cow[0]} bulls, {bull_cow[1]} cows")
@@ -99,5 +95,5 @@ def main():
                 break
         else:
             print(f"You ran out of tries. Number was {num}")
-        want_to_continue = user_valid_continue_input()
+        want_to_continue = check_continue_input_validity()
 main()
