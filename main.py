@@ -2,13 +2,13 @@
 import random
 
 
-def create_list_of_numbers(num):
-    return [int(i) for i in str(num)]
+def create_list_of_numbers(generated_number):
+    return [int(i) for i in str(generated_number)]
 
 
 def check_for_duplicity(num):
-    num_li = create_list_of_numbers(num)
-    if len(num_li) == len(set(num_li)):
+    generated_list = create_list_of_numbers(num)
+    if len(generated_list) == len(set(generated_list)):
         return True
     else:
         return False
@@ -16,20 +16,20 @@ def check_for_duplicity(num):
 
 def generate_number():
     while True:
-        num = random.randint(1000, 9999)
-        if check_for_duplicity(num):
-            return num
+        generated_number = random.randint(1000, 9999)
+        if check_for_duplicity(generated_number):
+            return generated_number
 
 
-def number_of_bulls_and_cows(num, guess):
+def number_of_bulls_and_cows(generated_number, guess):
     bull_or_cow = [0, 0]
-    num_li = create_list_of_numbers(num)
+    generated_list = create_list_of_numbers(generated_number)
     guess_li = create_list_of_numbers(guess)
 
     # Deciding bull or cow using if else and enumerate
     for index, number in enumerate(guess_li):
-        if number in num_li:
-            if number == num_li[index]:
+        if number in generated_list:
+            if number == generated_list[index]:
                 bull_or_cow[0] += 1
             else:
                 bull_or_cow[1] += 1
@@ -78,11 +78,11 @@ def main():
     want_to_continue = "yes"
     while want_to_continue == "yes":
         tries = check_tries_input_validity()
-        num = generate_number()
+        generated_number = generate_number()
 
         while tries > 0:
             guess = check_guess_input_validity()
-            bull_cow = number_of_bulls_and_cows(num, guess)
+            bull_cow = number_of_bulls_and_cows(generated_number, guess)
             print(f"{bull_cow[0]} bulls, {bull_cow[1]} cows")
             print(delimiter)
             tries -= 1
@@ -92,6 +92,6 @@ def main():
                 print(delimiter)
                 break
         else:
-            print(f"You ran out of tries. Number was {num}")
+            print(f"You ran out of tries. Number was {generated_number}")
         want_to_continue = check_continue_input_validity()
 main()
