@@ -26,23 +26,21 @@ def generate_number():
 
 # compares two lists to decide bulls and cows
 def number_of_bulls_and_cows(num, guess):
-    bull_cow = [0, 0]
+    bull_or_cow = [0, 0]
     num_li = create_list_of_numbers(num)
     guess_li = create_list_of_numbers(guess)
     for index, number in enumerate(guess_li):
 
         # common digit present
         if number in num_li:
-
             # common digit exact match
             if number == num_li[index]:
-                bull_cow[0] += 1
-
+                bull_or_cow[0] += 1
             # common digit match but in wrong position
             else:
-                bull_cow[1] += 1
+                bull_or_cow[1] += 1
 
-    return bull_cow
+    return bull_or_cow
 
 def user_valid_continue_input():
     user_input = input("Do you want to play again? yes/no:")
