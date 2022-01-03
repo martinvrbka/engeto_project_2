@@ -76,16 +76,16 @@ def user_valid_guess_input():
     while loopend == "no":
         try:
             guess = int(guess)
+            if not check_for_duplicates(guess):
+                guess = input("Number should not have repeated digits. Try again:")
+            if len(str(guess)) != 4:
+                guess = input("Number should have 4 digits. Try again:")
+            if isinstance(guess, int):
+                loopend = "yes"
         except ValueError:
             guess = input("You entered incorrect value. Please enter a integer:")
         except guess < 1000 or guess > 9999:
             guess = input("Enter 4 digit number only. Try again:")
-        if not check_for_duplicates(guess):
-            guess = input("Number should not have repeated digits. Try again:")
-        if len(str(guess)) != 4:
-            guess = input("Number should have 4 digits. Try again:")
-        if isinstance(guess, int):
-            loopend = "yes"
     return int(guess)
 
 
