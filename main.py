@@ -63,6 +63,7 @@ def check_guess_input_validity():
             guess = int(guess)
             if not check_for_duplicity(guess):
                 guess = input("Number should not have repeated digits. Try again:")
+            guess = int(guess)
             if len(str(guess)) != 4:
                 guess = input("Number should have 4 digits. Try again:")
         except ValueError:
@@ -73,6 +74,7 @@ def check_guess_input_validity():
 
 
 def main():
+    delimiter = 40*"-"
     want_to_continue = "yes"
     while want_to_continue == "yes":
         tries = check_tries_input_validity()
@@ -82,10 +84,12 @@ def main():
             guess = check_guess_input_validity()
             bull_cow = number_of_bulls_and_cows(num, guess)
             print(f"{bull_cow[0]} bulls, {bull_cow[1]} cows")
+            print(delimiter)
             tries -= 1
 
             if bull_cow[0] == 4:
                 print("You guessed right!")
+                print(delimiter)
                 break
         else:
             print(f"You ran out of tries. Number was {num}")
