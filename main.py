@@ -85,19 +85,28 @@ def main():
         while tries > 0:
             guess = check_guess_input_validity()
             bull_cow = number_of_bulls_and_cows(generated_number, guess)
-            print(f"{bull_cow[0]} bulls, {bull_cow[1]} cows")
-            print(delimiter)
+            print(
+                f"{bull_cow[0]} bulls, {bull_cow[1]} cows",
+                delimiter,
+                sep="\n"
+                )
             tries -= 1
 
             if bull_cow[0] == 4:
-                print("You guessed right!")
                 end_time = time.time()
-                print(f"It took you {round(end_time-start_time)} seconds.")
-                print(delimiter)
+                print(
+                    "You guessed right!",
+                    f"It took you {round(end_time-start_time)} seconds.",
+                    delimiter,
+                    sep="\n"
+                )
                 break
         else:
-            print(f"You ran out of tries. Number was {generated_number}")
             end_time = time.time()
-            print(f"It took you {round(end_time-start_time)} seconds.")
+            print(
+                f"You ran out of tries. Number was {generated_number}",
+                f"It took you {round(end_time-start_time)} seconds.",
+                sep="\n"
+            )
         want_to_continue = check_continue_input_validity()
 main()
