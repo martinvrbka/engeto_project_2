@@ -1,5 +1,6 @@
 # Engeto Bulls and Cows project
 import random
+import time
 
 
 def create_list_of_numbers(generated_number):
@@ -79,6 +80,7 @@ def main():
     while want_to_continue == "yes":
         tries = check_tries_input_validity()
         generated_number = generate_number()
+        start_time = time.time()
 
         while tries > 0:
             guess = check_guess_input_validity()
@@ -89,9 +91,13 @@ def main():
 
             if bull_cow[0] == 4:
                 print("You guessed right!")
+                end_time = time.time()
+                print(f"It took you {round(end_time-start_time)} seconds.")
                 print(delimiter)
                 break
         else:
             print(f"You ran out of tries. Number was {generated_number}")
+            end_time = time.time()
+            print(f"It took you {round(end_time-start_time)} seconds.")
         want_to_continue = check_continue_input_validity()
 main()
