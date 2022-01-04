@@ -47,14 +47,14 @@ def check_continue_input_validity():
         return user_input
 
 
-def check_tries_input_validity():
-    tries = input('Enter number of tries: ')
-    while not isinstance(tries, int):
+def check_attempts_input_validity():
+    attempts = input('Enter number of attempts: ')
+    while not isinstance(attempts, int):
         try:
-            tries = int(tries)
-            return tries
+            attempts = int(attempts)
+            return attempts
         except ValueError:
-            tries = input("You entered incorrect value. Please enter a integer:")
+            attempts = input("You entered incorrect value. Please enter a integer:")
 
 
 def check_guess_input_validity():
@@ -75,28 +75,28 @@ def check_guess_input_validity():
 
 
 def main():
-    delimiter = 40*"-"
+    delimiter = 40 * "-"
     want_to_continue = "yes"
     while want_to_continue == "yes":
-        tries = check_tries_input_validity()
+        attempts = check_attempts_input_validity()
         generated_number = generate_number()
         start_time = time.time()
 
-        while tries > 0:
+        while attempts > 0:
             guess = check_guess_input_validity()
             bull_cow = number_of_bulls_and_cows(generated_number, guess)
             print(
                 f"{bull_cow[0]} bulls, {bull_cow[1]} cows",
                 delimiter,
                 sep="\n"
-                )
-            tries -= 1
+            )
+            attempts -= 1
 
             if bull_cow[0] == 4:
                 end_time = time.time()
                 print(
                     "You guessed right!",
-                    f"It took you {round(end_time-start_time)} seconds.",
+                    f"It took you {round(end_time - start_time)} seconds.",
                     delimiter,
                     sep="\n"
                 )
@@ -104,9 +104,12 @@ def main():
         else:
             end_time = time.time()
             print(
-                f"You ran out of tries. Number was {generated_number}",
-                f"It took you {round(end_time-start_time)} seconds.",
+                f"You ran out of attempts. Number was {generated_number}",
+                f"It took you {round(end_time - start_time)} seconds.",
+                delimiter,
                 sep="\n"
             )
         want_to_continue = check_continue_input_validity()
+
+
 main()
