@@ -42,7 +42,7 @@ def check_continue_input_validity():
     user_input = input("Do you want to play again? yes/no:")
     acceptable_values = ["yes", "no", "y", "n", "YES", "NO", "Y", "N"]
     while user_input not in acceptable_values:
-        user_input = input("You have used unsupported value. Please try to use yes or no:")
+        user_input = input("You have used unsupported value. Please try to use 'yes' or 'no':")
     else:
         return user_input
 
