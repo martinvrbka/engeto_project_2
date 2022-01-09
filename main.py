@@ -50,11 +50,12 @@ def check_continue_input_validity():
 def check_guess_input_validity():
     guess = input("Enter your guess: ")
     while not isinstance(guess, int):
+        if guess[0] == "0":
+            guess = input("Number cannot start with 0. Try again:")
         try:
             guess = int(guess)
             if not check_for_duplicity(guess):
-                guess = input("Number should not have repeated digits. Try again:")
-            guess = int(guess)
+                guess = int(input("Number should not have repeated digits. Try again:"))
             if len(str(guess)) != 4:
                 guess = input("Number should have 4 digits. Try again:")
         except ValueError:
