@@ -76,7 +76,7 @@ def greeter(delimiter):
 
 
 def main():
-    delimiter = 45 * "-"
+    delimiter = 50 * "-"
     want_to_continue = "yes"
     attempts = 0
     generated_number = generate_number()
